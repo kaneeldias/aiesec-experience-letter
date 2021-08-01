@@ -1,0 +1,27 @@
+.toolbar {
+  padding:15px;
+}
+
+.heading {
+  padding-left:20px;
+  color:white;
+  line-height:30px;
+  font-weight:bold;
+  font-size:20px;
+}
+
+mat-card-title {
+  margin-bottom:40px;
+}
+
+mat-card {
+  margin:20px;
+  padding:20px;
+  border-top-color:#3F51B5;
+  border-top-width:5px;
+  border-top-style:solid;
+}
+
+.spacer {
+  margin:10px;
+}
