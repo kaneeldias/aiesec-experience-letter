@@ -25,3 +25,12 @@ mat-card {
 .spacer {
   margin:10px;
 }
+
+mat-card-content {
+  min-width: 800px;
+}
+
+.x_header {
+  font-weight:bold;
+  font-size:10px;
+}
