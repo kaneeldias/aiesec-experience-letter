@@ -53,19 +53,21 @@
 
       <div class="spacer"></div>
 
-      <mat-form-field>
-        <mat-label>Date you joined AIESEC</mat-label>
-        <input matInput [matDatepicker]="joined" [(ngModel)]="form.joined">
-        <mat-datepicker-toggle matSuffix [for]="joined"></mat-datepicker-toggle>
-        <mat-datepicker #joined></mat-datepicker>
-      </mat-form-field>
+      <div fxLayout="row" fxLayoutAlign="stretch stretch" fxLayoutGap="20px">
+        <mat-form-field fxFlex="50">
+          <mat-label>Date you joined AIESEC</mat-label>
+          <input matInput [matDatepicker]="joined" [(ngModel)]="form.joined">
+          <mat-datepicker-toggle matSuffix [for]="joined"></mat-datepicker-toggle>
+          <mat-datepicker #joined></mat-datepicker>
+        </mat-form-field>
 
-      <mat-form-field>
-        <mat-label>Date you left AIESEC (leave blank if you are a currently active member)</mat-label>
-        <input matInput [matDatepicker]="exit" [(ngModel)]="form.exit">
-        <mat-datepicker-toggle matSuffix [for]="exit"></mat-datepicker-toggle>
-        <mat-datepicker #exit></mat-datepicker>
-      </mat-form-field>
+        <mat-form-field fxFlex="50">
+          <mat-label>Date you left AIESEC (leave blank if you are a currently active member)</mat-label>
+          <input matInput [matDatepicker]="exit" [(ngModel)]="form.exit">
+          <mat-datepicker-toggle matSuffix [for]="exit"></mat-datepicker-toggle>
+          <mat-datepicker #exit></mat-datepicker>
+        </mat-form-field>
+      </div>
 
     </mat-card-content>
 
@@ -84,17 +86,17 @@
 
         <mat-form-field fxFlex="33">
           <mat-label>Role/Position</mat-label>
-          <input matInput [(ngModel)]="position.role">
+          <input matInput [(ngModel)]="position.role" placeholder="Team Leader">
         </mat-form-field>
 
         <mat-form-field fxFlex="33">
           <mat-label>Team/Function</mat-label>
-          <input matInput [(ngModel)]="position.function">
+          <input matInput [(ngModel)]="position.function" placeholder="Incoming Global Volunteer">
         </mat-form-field>
 
-        <mat-form-field xFlex="33">
+        <mat-form-field fxFlex="33">
           <mat-label>Entity</mat-label>
-          <input matInput [(ngModel)]="position.entity">
+          <input matInput [(ngModel)]="position.entity" placeholder="AIESEC in Disneyland">
         </mat-form-field>
 
       </div>
@@ -121,17 +123,17 @@
 
         <mat-form-field fxFlex="33">
           <mat-label>Role (delegate/faci)</mat-label>
-          <input matInput [(ngModel)]="conference.role">
+          <input matInput [(ngModel)]="conference.role" placeholder="Delegate">
         </mat-form-field>
 
         <mat-form-field fxFlex="33">
           <mat-label>Conference Name</mat-label>
-          <input matInput [(ngModel)]="conference.name">
+          <input matInput [(ngModel)]="conference.name" placeholder="National Leadership Development Seminar">
         </mat-form-field>
 
         <mat-form-field fxFlex="33">
           <mat-label>Year</mat-label>
-          <input matInput [(ngModel)]="conference.year">
+          <input matInput [(ngModel)]="conference.year" placeholder="2021">
         </mat-form-field>
 
       </div>
@@ -156,9 +158,19 @@
 
         <span class="x_header">Achievement #{{i+1}}</span>
 
-        <mat-form-field fxFlex="100">
+        <mat-form-field fxFlex="33">
           <mat-label>Achievement</mat-label>
-          <input matInput [(ngModel)]="form.achievements[i]">
+          <input matInput [(ngModel)]="achievement.title" placeholder="Best Young Leader">
+        </mat-form-field>
+
+        <mat-form-field fxFlex="33">
+          <mat-label>Entity</mat-label>
+          <input matInput [(ngModel)]="achievement.entity" placeholder="AIESEC Sri Lanka">
+        </mat-form-field>
+
+        <mat-form-field fxFlex="33">
+          <mat-label>Term</mat-label>
+          <input matInput [(ngModel)]="achievement.term" placeholder="2021/22">
         </mat-form-field>
 
       </div>
@@ -184,7 +196,7 @@
       </mat-form-field>
 
       <mat-form-field fxFlex="33">
-        <mat-label>The reason you're requesting an Experience Letter</mat-label>
+        <mat-label>The reason you are requesting an experience letter</mat-label>
         <input matInput [(ngModel)]="form.reason">
       </mat-form-field>
 
@@ -192,9 +204,7 @@
 
   </mat-card>
 
-  <button mat-flat-button color="primary" (click)="print()">Submit</button>
-
-
+  <button mat-flat-button color="primary" (click)="submit()">Submit</button>
 
 </div>
 

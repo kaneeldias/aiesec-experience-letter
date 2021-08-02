@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-root',
@@ -24,14 +25,18 @@ export class AppComponent {
       {role: null, name: null, year: null}
     ],
     achievements: [
-      ""
+      {title: null, entity: null, term: null}
     ],
     pmvp: null,
     reason:null
   };
 
-  print() {
-    console.log(this.form);
+  constructor(private store: AngularFirestore) {}
+
+  submit() {
+    this.store.collection('requests').add(this.form).then(r => {
+      console.log("added");
+    });
   };
 
   addExperience() {
@@ -43,7 +48,7 @@ export class AppComponent {
   }
 
   addAchievement() {
-    this.form.achievements.push("");
+    this.form.achievements.push({title: null, entity: null, term: null});
   }
 
 }

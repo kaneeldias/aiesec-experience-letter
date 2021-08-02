@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "experience-letter": {
+      "hosting": {
+        "endorsement-letters": [
+          "experience-letter"
+        ]
+      }
+    }
+  }
+}
