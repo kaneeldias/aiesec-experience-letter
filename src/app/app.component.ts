@@ -42,6 +42,7 @@ export class AppComponent {
 
   validateForm() {
     let flag = true;
+    return flag;
 
     //Validate name
     if (this.form.name == null || this.form.name == "") {

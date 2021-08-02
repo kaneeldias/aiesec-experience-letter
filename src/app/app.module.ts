@@ -18,7 +18,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatIconModule} from "@angular/material/icon";
 import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+import {AngularFirestoreModule, SETTINGS} from '@angular/fire/firestore';
 import {environment} from "../environments/environment";
 
 
@@ -45,7 +45,15 @@ import {environment} from "../environments/environment";
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: SETTINGS,
+      useValue: environment.production ? undefined : {
+        host: 'localhost:8080',
+        ssl: false
+      }
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
