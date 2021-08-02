@@ -34,10 +34,22 @@ export class AppComponent {
   constructor(private store: AngularFirestore) {}
 
   submit() {
+    if (!this.validateForm()) return;
     this.store.collection('requests').add(this.form).then(r => {
       console.log("added");
     });
   };
+
+  validateForm() {
+    let flag = true;
+
+    //Validate name
+    if (this.form.name == null || this.form.name == "") {
+      flag = false;
+    }
+
+    return flag;
+  }
 
   addExperience() {
     this.form.positions.push({role: null, function: null, entity: null});
