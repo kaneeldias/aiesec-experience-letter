@@ -10,12 +10,11 @@ module.exports = {
       keyFilename: 'credentials.json',
       scopes: ['https://www.googleapis.com/auth/documents', 'https://www.googleapis.com/auth/drive']
     });
-
     const driveClient = await googleDrive.drive({
       version: "v2",
       auth: auth
     });
-    let copyDocumentId = await copyTemplate(driveClient, "Kaneel Dias Experience Letter");
+    let copyDocumentId = await copyTemplate(driveClient, data.name + " Experience Letter");
 
     const docsClient = await googleDocs.docs({
       version: 'v1',

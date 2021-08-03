@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-root',
@@ -31,12 +33,20 @@ export class AppComponent {
     reason:null
   };
 
-  constructor(private store: AngularFirestore) {}
+
+  loading = false;
+
+  constructor(private store: AngularFirestore, private _snackBar: MatSnackBar) {}
 
   submit() {
     if (!this.validateForm()) return;
+    this.loading = true;
     this.store.collection('requests').add(this.form).then(r => {
-      console.log("added");
+      this.loading = false;
+      this.openSnackBar("Your request has been submitted", "Dismiss");
+    }, e => {
+      this.loading = false;
+      this.openSnackBar("An error occurred." + e, "Dismiss");
     });
   };
 
@@ -62,6 +72,10 @@ export class AppComponent {
 
   addAchievement() {
     this.form.achievements.push({title: null, entity: null, term: null});
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
   }
 
 }

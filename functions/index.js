@@ -7,17 +7,18 @@ const db = admin.firestore();
 exports.onNewRequest = functions.firestore.document('/requests/{documentId}')
   .onCreate( async (snap, context) => {
     let docUrl = await test.test(snap.data());
-    console.log(docUrl);
+
+    const emailConfig = (await db.collection('config').doc('email').get()).data();
+
     let email = {
-      subject: snap.data().name + " has requested for an experience letter.",
+      to: emailConfig.lcvps_pm[snap.data().entity],
+      cc: [emailConfig.mcvp_im],
+      replyTo: emailConfig.mcvp_tm,
+      message: {
+        subject: snap.data().name + " has requested for an experience letter.",
+        text: docUrl
+      },
       data: snap.data(),
-      mcvp_email: 'kaneel.dias2@aiesec.net',
-      member_email: snap.data().email,
-      docUrl: docUrl
     }
     await db.collection("emails").add(email)
   });
-
-exports.test = functions.https.onRequest(async (req, res) => {
-  res.json({result: await test.test()});
-});

@@ -20,31 +20,35 @@ import {MatIconModule} from "@angular/material/icon";
 import { AngularFireModule } from '@angular/fire';
 import {AngularFirestoreModule, SETTINGS} from '@angular/fire/firestore';
 import {environment} from "../environments/environment";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
   declarations: [
     AppComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    FlexLayoutModule,
-    MatFormFieldModule,
-    MatSliderModule,
-    MatInputModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatSelectModule,
-    FormsModule,
-    MatButtonModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatIconModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        FlexLayoutModule,
+        MatFormFieldModule,
+        MatSliderModule,
+        MatInputModule,
+        MatCardModule,
+        MatCheckboxModule,
+        MatSelectModule,
+        FormsModule,
+        MatButtonModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatIconModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFirestoreModule,
+        MatProgressSpinnerModule,
+        MatSnackBarModule
+    ],
   providers: [
     {
       provide: SETTINGS,
