@@ -2,6 +2,9 @@ const googleDrive = require('@googleapis/drive')
 const googleDocs = require('@googleapis/docs')
 const {GoogleAuth} = require('google-auth-library');
 const dateFormat = require('dateformat');
+const admin = require('firebase-admin');
+const db = admin.firestore();
+
 
 module.exports = {
   create: async function (data) {
@@ -14,7 +17,10 @@ module.exports = {
       version: "v2",
       auth: auth
     });
-    let copyDocumentId = await copyTemplate(driveClient, data.name + " Experience Letter");
+    let copyDocumentId = await copyTemplate(
+      driveClient,
+      data.name + " Experience Letter",
+      await getFolder(data.entity));
 
     const docsClient = await googleDocs.docs({
       version: 'v1',
@@ -34,10 +40,12 @@ module.exports = {
   },
 };
 
-async function copyTemplate(driveClient, docName) {
+async function copyTemplate(driveClient, docName, folder) {
   let request = {
     title: docName,
+    parents: [{"id": folder}]
   };
+  console.log(request);
   let response = await driveClient.files.copy({
     fileId: "1mvVXhM36vkFzR02y0lUnE1sWIhrKm64eIBx7QEtHSdM",
     resource: request,
@@ -102,6 +110,11 @@ function getRequestData(data) {
 
   return requests;
 
+}
+
+async function getFolder(entity) {
+  const foldersConfig = (await db.collection('config').doc('folders').get()).data();
+  return foldersConfig[entity];
 }
 
 function replaceTemplate(search, replace) {
