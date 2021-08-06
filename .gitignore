@@ -49,3 +49,6 @@ Thumbs.db
 
 # Authentication
 /functions/credentials.json
+
+# Data
+/functions/emulator-data
