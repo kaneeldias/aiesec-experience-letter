@@ -4,7 +4,7 @@ const {GoogleAuth} = require('google-auth-library');
 const dateFormat = require('dateformat');
 
 module.exports = {
-  test: async function (data) {
+  create: async function (data) {
 
     const auth = new GoogleAuth({
       keyFilename: 'credentials.json',

@@ -1,218 +1,227 @@
 <!-- Toolbar -->
-<div class="toolbar" role="banner" fxLayout="row" fxLayoutAlign=start center style="background-color:#3F51B5">
-  <img
-    alt="AIESEC logo"
-    src="assets/White-Blue-Logo.png"
-    height="30px"
-  />
-  <span class="heading" [fxHide.lt-md]="true">AIESEC Sri Lanka Experience Letter Request</span>
+<div fxLayout="column" fxLayoutAlign="stretch stretch">
+
+  <div class="toolbar" fxLayout="row" fxLayoutAlign="center center" style="background-color:#3F51B5">
+    <img
+      alt="AIESEC logo"
+      src="assets/White-Blue-Logo.png"
+      height="30px"
+    />
+    <span class="heading" [fxHide.lt-md]="true">AIESEC Sri Lanka Experience Letter Request</span>
+  </div>
+
+  <div fxLayout="column" fxLayoutAlign="center center" fxLayoutAlign.lt-md="stretch stretch">
+
+    <div class="content" role="main" fxLayout="column" fxLayoutAlign="stretch stretch" fxLayoutAlign.lt-md="stretch stretch">
+
+      <mat-card>
+
+        <mat-card-title>Basic Information</mat-card-title>
+
+        <mat-card-content fxLayout="column" fxLayoutAlign="stretch stretch">
+
+          <mat-form-field>
+            <mat-label>Name (as it should appear on the letter)</mat-label>
+            <input matInput [(ngModel)]="form.name">
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Email Address</mat-label>
+            <input matInput type="email" [(ngModel)]="form.email">
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Contact Number</mat-label>
+            <input matInput [(ngModel)]="form.contact">
+          </mat-form-field>
+
+        </mat-card-content>
+
+      </mat-card>
+
+      <mat-card>
+
+        <mat-card-title>AIESEC Information</mat-card-title>
+
+        <mat-card-content fxLayout="column" fxLayoutAlign="stretch stretch">
+
+          <mat-form-field>
+            <mat-label>Entity</mat-label>
+            <mat-select [(ngModel)]="form.entity">
+              <mat-option *ngFor="let entity of entities" [value]="entity">{{entity}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-checkbox style="margin-top:20px" [(ngModel)]="form.full_member">Are you a full member?</mat-checkbox>
+
+          <div class="spacer"></div>
+
+          <div fxLayout="row" fxLayoutAlign="stretch stretch" fxLayoutGap="20px" fxLayout.lt-md="column">
+            <mat-form-field fxFlex="50">
+              <mat-label>Date you joined AIESEC</mat-label>
+              <input matInput [matDatepicker]="joined" [(ngModel)]="form.joined">
+              <mat-datepicker-toggle matSuffix [for]="joined"></mat-datepicker-toggle>
+              <mat-datepicker #joined></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field fxFlex="50">
+              <mat-label>Date you left AIESEC (leave blank if you are a currently active member)</mat-label>
+              <input matInput [matDatepicker]="exit" [(ngModel)]="form.exit">
+              <mat-datepicker-toggle matSuffix [for]="exit"></mat-datepicker-toggle>
+              <mat-datepicker #exit></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+        </mat-card-content>
+
+      </mat-card>
+
+      <mat-card>
+
+        <mat-card-title>Positions Held</mat-card-title>
+
+        <mat-card-content fxLayout="column" fxLayoutAlign="stretch stretch" fxLayoutGap.lt-md="20px">
+
+          <div fxLayout="row" fxLayout.lt-md="column"  fxLayoutGap="10px" fxLayoutGap.lt-md="0px" fxLayoutAlign="stretch stretch"
+               *ngFor="let position of form.positions; let i = index">
+
+            <span class="x_header">Position #{{i+1}}</span>
+
+            <mat-form-field fxFlex="33">
+              <mat-label>Role/Position</mat-label>
+              <input matInput [(ngModel)]="position.role" placeholder="Team Leader">
+            </mat-form-field>
+
+            <mat-form-field fxFlex="33">
+              <mat-label>Team/Function</mat-label>
+              <input matInput [(ngModel)]="position.function" placeholder="Incoming Global Volunteer">
+            </mat-form-field>
+
+            <mat-form-field fxFlex="33">
+              <mat-label>Entity</mat-label>
+              <input matInput [(ngModel)]="position.entity" placeholder="AIESEC in Disneyland">
+            </mat-form-field>
+
+          </div>
+
+          <button mat-icon-button color="primary" (click)="addExperience();">
+            <mat-icon>add</mat-icon>
+            <mat-label>Add another experience</mat-label>
+          </button>
+
+        </mat-card-content>
+
+      </mat-card>
+
+      <mat-card>
+
+        <mat-card-title>Conferences Attended</mat-card-title>
+
+        <mat-card-content fxLayout="column" fxLayoutAlign="stretch stretch" fxLayoutGap.lt-md="20px">
+
+          <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px" fxLayoutGap.lt-md="0px" fxLayoutAlign="stretch stretch"
+               *ngFor="let conference of form.conferences; let i = index">
+
+            <span class="x_header">Conference #{{i+1}}</span>
+
+            <mat-form-field fxFlex="33">
+              <mat-label>Role (delegate/faci)</mat-label>
+              <input matInput [(ngModel)]="conference.role" placeholder="Delegate">
+            </mat-form-field>
+
+            <mat-form-field fxFlex="33">
+              <mat-label>Conference Name</mat-label>
+              <input matInput [(ngModel)]="conference.name" placeholder="National Leadership Development Seminar">
+            </mat-form-field>
+
+            <mat-form-field fxFlex="33">
+              <mat-label>Year</mat-label>
+              <input matInput [(ngModel)]="conference.year" placeholder="2021">
+            </mat-form-field>
+
+          </div>
+
+          <button mat-icon-button color="primary" (click)="addConference();">
+            <mat-icon>add</mat-icon>
+            <mat-label>Add another conference</mat-label>
+          </button>
+
+        </mat-card-content>
+
+      </mat-card>
+
+      <mat-card>
+
+        <mat-card-title>Special Achievements</mat-card-title>
+
+        <mat-card-content fxLayout="column" fxLayoutAlign="stretch stretch" fxLayoutGap.lt-md="20px">
+
+          <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px" fxLayoutGap.lt-md="0px" fxLayoutAlign="stretch stretch"
+               *ngFor="let achievement of form.achievements; let i = index">
+
+            <span class="x_header">Achievement #{{i+1}}</span>
+
+            <mat-form-field fxFlex="33">
+              <mat-label>Achievement</mat-label>
+              <input matInput [(ngModel)]="achievement.title" placeholder="Best Young Leader">
+            </mat-form-field>
+
+            <mat-form-field fxFlex="33">
+              <mat-label>Entity</mat-label>
+              <input matInput [(ngModel)]="achievement.entity" placeholder="AIESEC Sri Lanka">
+            </mat-form-field>
+
+            <mat-form-field fxFlex="33">
+              <mat-label>Term</mat-label>
+              <input matInput [(ngModel)]="achievement.term" placeholder="2021/22">
+            </mat-form-field>
+
+          </div>
+
+          <button mat-icon-button color="primary" (click)="addAchievement();">
+            <mat-icon>add</mat-icon>
+            <mat-label>Add another achievement</mat-label>
+          </button>
+
+        </mat-card-content>
+
+      </mat-card>
+
+      <mat-card>
+
+        <mat-card-title>Other</mat-card-title>
+
+        <mat-card-content fxLayout="column" fxLayoutAlign="stretch stretch">
+
+          <mat-form-field fxFlex="33">
+            <mat-label>Name of the Vice President - People Management of your entity when you left AIESEC or current.</mat-label>
+            <input matInput [(ngModel)]="form.pmvp">
+          </mat-form-field>
+
+          <mat-form-field fxFlex="33">
+            <mat-label>The reason you are requesting an experience letter</mat-label>
+            <input matInput [(ngModel)]="form.reason">
+          </mat-form-field>
+
+        </mat-card-content>
+
+      </mat-card>
+
+      <div fxLayoutAlign="" style="padding:20px;">
+        <button fxLayout="row" mat-flat-button color="primary" (click)="submit()"
+                style="font-size:20px; padding:10px;" [disabled]="loading">
+          SUBMIT
+        </button>
+      </div>
+
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="center center" style="position:fixed; top:0px; left:0px; width:100%; height:100%;
+    background-color:white; opacity:0.8" *ngIf="loading">
+      <mat-spinner></mat-spinner>
+    </div>
+
+  </div>
 
 </div>
 
-<div class="content" role="main" fxLayout="column" fxLayoutAlign="center center" style="padding:20px">
-
-  <mat-card>
-
-    <mat-card-title>Basic Information</mat-card-title>
-
-    <mat-card-content fxLayout="column" fxLayoutAlign="stretch stretch">
-
-      <mat-form-field>
-        <mat-label>Name (as it should appear on the letter)</mat-label>
-        <input matInput [(ngModel)]="form.name">
-      </mat-form-field>
-
-      <mat-form-field>
-        <mat-label>Email Address</mat-label>
-        <input matInput type="email" [(ngModel)]="form.email">
-      </mat-form-field>
-
-      <mat-form-field>
-        <mat-label>Contact Number</mat-label>
-        <input matInput [(ngModel)]="form.contact">
-      </mat-form-field>
-
-    </mat-card-content>
-
-  </mat-card>
-
-  <mat-card>
-
-    <mat-card-title>AIESEC Information</mat-card-title>
-
-    <mat-card-content fxLayout="column" fxLayoutAlign="stretch stretch">
-
-      <mat-form-field>
-        <mat-label>Entity</mat-label>
-        <mat-select [(ngModel)]="form.entity">
-          <mat-option *ngFor="let entity of entities" [value]="entity">{{entity}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <mat-checkbox style="margin-top:20px" [(ngModel)]="form.full_member">Are you a full member?</mat-checkbox>
-
-      <div class="spacer"></div>
-
-      <div fxLayout="row" fxLayoutAlign="stretch stretch" fxLayoutGap="20px">
-        <mat-form-field fxFlex="50">
-          <mat-label>Date you joined AIESEC</mat-label>
-          <input matInput [matDatepicker]="joined" [(ngModel)]="form.joined">
-          <mat-datepicker-toggle matSuffix [for]="joined"></mat-datepicker-toggle>
-          <mat-datepicker #joined></mat-datepicker>
-        </mat-form-field>
-
-        <mat-form-field fxFlex="50">
-          <mat-label>Date you left AIESEC (leave blank if you are a currently active member)</mat-label>
-          <input matInput [matDatepicker]="exit" [(ngModel)]="form.exit">
-          <mat-datepicker-toggle matSuffix [for]="exit"></mat-datepicker-toggle>
-          <mat-datepicker #exit></mat-datepicker>
-        </mat-form-field>
-      </div>
-
-    </mat-card-content>
-
-  </mat-card>
-
-  <mat-card>
-
-    <mat-card-title>Positions Held</mat-card-title>
-
-    <mat-card-content fxLayout="column" fxLayoutAlign="stretch stretch">
-
-      <div fxLayout="row" fxLayout.lt-md="column"  fxLayoutGap="10px" fxLayoutAlign="stretch stretch"
-           *ngFor="let position of form.positions; let i = index">
-
-        <span class="x_header">Position #{{i+1}}</span>
-
-        <mat-form-field fxFlex="33">
-          <mat-label>Role/Position</mat-label>
-          <input matInput [(ngModel)]="position.role" placeholder="Team Leader">
-        </mat-form-field>
-
-        <mat-form-field fxFlex="33">
-          <mat-label>Team/Function</mat-label>
-          <input matInput [(ngModel)]="position.function" placeholder="Incoming Global Volunteer">
-        </mat-form-field>
-
-        <mat-form-field fxFlex="33">
-          <mat-label>Entity</mat-label>
-          <input matInput [(ngModel)]="position.entity" placeholder="AIESEC in Disneyland">
-        </mat-form-field>
-
-      </div>
-
-      <button mat-icon-button color="primary" (click)="addExperience();">
-        <mat-icon>add</mat-icon>
-        <mat-label>Add another experience</mat-label>
-      </button>
-
-    </mat-card-content>
-
-  </mat-card>
-
-  <mat-card>
-
-    <mat-card-title>Conferences Attended</mat-card-title>
-
-    <mat-card-content fxLayout="column" fxLayoutAlign="stretch stretch">
-
-      <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px" fxLayoutAlign="stretch stretch"
-           *ngFor="let conference of form.conferences; let i = index">
-
-        <span class="x_header">Conference #{{i+1}}</span>
-
-        <mat-form-field fxFlex="33">
-          <mat-label>Role (delegate/faci)</mat-label>
-          <input matInput [(ngModel)]="conference.role" placeholder="Delegate">
-        </mat-form-field>
-
-        <mat-form-field fxFlex="33">
-          <mat-label>Conference Name</mat-label>
-          <input matInput [(ngModel)]="conference.name" placeholder="National Leadership Development Seminar">
-        </mat-form-field>
-
-        <mat-form-field fxFlex="33">
-          <mat-label>Year</mat-label>
-          <input matInput [(ngModel)]="conference.year" placeholder="2021">
-        </mat-form-field>
-
-      </div>
-
-      <button mat-icon-button color="primary" (click)="addConference();">
-        <mat-icon>add</mat-icon>
-        <mat-label>Add another conference</mat-label>
-      </button>
-
-    </mat-card-content>
-
-  </mat-card>
-
-  <mat-card>
-
-    <mat-card-title>Special Achievements</mat-card-title>
-
-    <mat-card-content fxLayout="column" fxLayoutAlign="stretch stretch">
-
-      <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="stretch stretch"
-           *ngFor="let achievement of form.achievements; let i = index">
-
-        <span class="x_header">Achievement #{{i+1}}</span>
-
-        <mat-form-field fxFlex="33">
-          <mat-label>Achievement</mat-label>
-          <input matInput [(ngModel)]="achievement.title" placeholder="Best Young Leader">
-        </mat-form-field>
-
-        <mat-form-field fxFlex="33">
-          <mat-label>Entity</mat-label>
-          <input matInput [(ngModel)]="achievement.entity" placeholder="AIESEC Sri Lanka">
-        </mat-form-field>
-
-        <mat-form-field fxFlex="33">
-          <mat-label>Term</mat-label>
-          <input matInput [(ngModel)]="achievement.term" placeholder="2021/22">
-        </mat-form-field>
-
-      </div>
-
-      <button mat-icon-button color="primary" (click)="addAchievement();">
-        <mat-icon>add</mat-icon>
-        <mat-label>Add another achievement</mat-label>
-      </button>
-
-    </mat-card-content>
-
-  </mat-card>
-
-  <mat-card>
-
-    <mat-card-title>Other</mat-card-title>
-
-    <mat-card-content fxLayout="column" fxLayoutAlign="stretch stretch">
-
-      <mat-form-field fxFlex="33">
-        <mat-label>Name of the Vice President - People Management of your entity when you left AIESEC or current.</mat-label>
-        <input matInput [(ngModel)]="form.pmvp">
-      </mat-form-field>
-
-      <mat-form-field fxFlex="33">
-        <mat-label>The reason you are requesting an experience letter</mat-label>
-        <input matInput [(ngModel)]="form.reason">
-      </mat-form-field>
-
-    </mat-card-content>
-
-  </mat-card>
-
-  <button fxLayout="row" mat-flat-button color="primary" (click)="submit()"
-          style="font-size:20px; padding:10px;" [disabled]="loading">
-    SUBMIT
-  </button>
-
-</div>
-
-<div fxLayout="row" fxLayoutAlign="center center" style="position:fixed; top:0px; left:0px; width:100%; height:100%;
-  background-color:white; opacity:0.8" *ngIf="loading">
-  <mat-spinner></mat-spinner>
-</div>
-<router-outlet></router-outlet>
