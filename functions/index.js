@@ -1,4 +1,7 @@
 const functions = require("firebase-functions");
+const admin = require('firebase-admin');
+admin.initializeApp();
+
 let docs = require("./docs.js");
 let email = require("./email.js");
 
