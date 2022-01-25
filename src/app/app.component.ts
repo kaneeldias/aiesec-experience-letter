@@ -10,7 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class AppComponent {
 
-  entities = ["Colombo Central", "Colombo North", "Colombo South", "Kandy", "USJ", "Ruhuna", "SLIIT"];
+  entities = ["Colombo Central", "Colombo North", "Colombo South", "Kandy", "USJ", "NSBM", "Ruhuna", "SLIIT"];
 
   form = {
     name: null,
@@ -41,7 +41,8 @@ export class AppComponent {
   submit() {
     if (!this.validateForm()) return;
     this.loading = true;
-    this.store.collection('requests').add(this.form).then(r => {
+    this.store.collection('requests').doc(new Date().toISOString() + this.form.email!)
+      .set(this.form).then(r => {
       this.loading = false;
       this.openSnackBar("Your request has been submitted", "Dismiss");
     }, e => {

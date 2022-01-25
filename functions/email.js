@@ -14,6 +14,6 @@ module.exports = {
       },
       data: requestData,
     }
-    await db.collection("emails").add(email)
+    await db.collection("emails").doc(new Date().toISOString() + email).set(email)
   }
 };
